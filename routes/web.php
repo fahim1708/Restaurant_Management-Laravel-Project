@@ -31,9 +31,17 @@ Route::controller(AdminController::class)->group(function () {
 });
 
 /* User */
-Route::resource('user', UserController::class)->only([
-    'index','destroy'
-]);
+// Route::resource('user', UserController::class)->only([
+//     'index','destroy'
+// ]);
+/* User Profile and Password */
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/profile', [UserController::class, 'showProfile'])->name('user.profile');
+    Route::put('/user/profile', [UserController::class, 'updateProfile'])->name('user.profile.update');  // <-- This route is important
+    Route::put('/user/password', [UserController::class, 'updatePassword'])->name('user.password.update');
+});
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile.show');
+
 
 /* Reservation */
 Route::resource('reservation', ReservationController::class)->only([
