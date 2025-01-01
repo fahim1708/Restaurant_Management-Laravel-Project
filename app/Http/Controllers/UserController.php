@@ -68,10 +68,15 @@ class UserController extends Controller
     // ---------------------
     public function showProfile()
     {
+        $user = auth()->user();
+        $isAdmin = $user && $user->usertype === 'admin'; // Check if the user is an admin
+
         return view('profile.profile', [
-            'user' => auth()->user(), // Pass the logged-in user's data to the view
+            'user' => $user,
+            'isAdmin' => $isAdmin,
         ]);
     }
+
 
     // Update user profile (name and email)
     public function updateProfile(Request $request)

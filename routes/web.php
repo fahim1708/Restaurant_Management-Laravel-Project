@@ -69,3 +69,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/admin/users', [UserController::class, 'index'])->name('user.index');
+
+Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+

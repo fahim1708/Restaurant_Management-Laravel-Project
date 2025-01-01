@@ -21,10 +21,14 @@
             <h1 class="text-3xl font-bold text-center flex-grow" style="color: #f78029;">Customer Profile</h1>
 
             <!-- Logout Link (Right) -->
-            <a href="{{ route('logout') }}" 
-            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm font-semibold">
-                Logout
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" 
+                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm font-semibold">
+                    Logout
+                </button>
+            </form>
+            
         </div>
     </header>
 
@@ -36,7 +40,13 @@
             <h2 class="text-xl font-semibold mb-4" style="color: #f78029;">Personal Information</h2>
             <p><strong>Name:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
-            <p><strong>User Type:</strong> Customer</p>
+            <p><strong>User Type:</strong> 
+                @if ($isAdmin === true)
+                    Admin
+                @else
+                    Customer
+                @endif
+            </p>
         </div>
 
         <!-- Update Profile Section -->

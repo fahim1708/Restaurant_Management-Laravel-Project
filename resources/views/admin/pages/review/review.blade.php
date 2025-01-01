@@ -75,3 +75,6 @@
   }
  </script>
 </x-admin.index>
+<script>
+    console.log("Is Admin: {{ $isAdmin ? 'true' : 'false' }}");
+</script>

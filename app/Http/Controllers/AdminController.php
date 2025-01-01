@@ -17,8 +17,9 @@ class AdminController extends Controller
      */
     private function GetIsAdmin()
     {
-        return Auth::id() && Auth::user()->usertype = "1" ? true : false;
+        return Auth::check() && Auth::user()->usertype === "admin";
     }
+    
 
     /**
      * Display a admin dashboard of foodfun site.
@@ -32,4 +33,5 @@ class AdminController extends Controller
         $testimonial = testimonial::take(4)->get();
         return view("admin.index", compact("user", "isAdmin", "testimonial"));
     }
+
 }

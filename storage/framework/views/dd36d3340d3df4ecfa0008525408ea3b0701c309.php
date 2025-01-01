@@ -21,10 +21,14 @@
             <h1 class="text-3xl font-bold text-center flex-grow" style="color: #f78029;">Customer Profile</h1>
 
             <!-- Logout Link (Right) -->
-            <a href="<?php echo e(route('logout')); ?>" 
-            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm font-semibold">
-                Logout
-            </a>
+            <form method="POST" action="<?php echo e(route('logout')); ?>">
+                <?php echo csrf_field(); ?>
+                <button type="submit" 
+                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm font-semibold">
+                    Logout
+                </button>
+            </form>
+            
         </div>
     </header>
 
@@ -36,7 +40,13 @@
             <h2 class="text-xl font-semibold mb-4" style="color: #f78029;">Personal Information</h2>
             <p><strong>Name:</strong> <?php echo e($user->name); ?></p>
             <p><strong>Email:</strong> <?php echo e($user->email); ?></p>
-            <p><strong>User Type:</strong> Customer</p>
+            <p><strong>User Type:</strong> 
+                <?php if($isAdmin === true): ?>
+                    Admin
+                <?php else: ?>
+                    Customer
+                <?php endif; ?>
+            </p>
         </div>
 
         <!-- Update Profile Section -->

@@ -35,6 +35,9 @@
     <li class="nav-item nav-category">
       <span class="nav-link">Tables</span>
     </li>
+
+    @if ($isAdmin === true)
+    <!-- Links for Admin -->
     <li class="nav-item">
       <a class="nav-link" href="{{ route('user.index') }}">
         <span class="menu-title">Users</span>
@@ -42,28 +45,37 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('foodmenu.index')}}">
-        <span class="menu-title">Food Menu</span>        
+      <a class="nav-link" href="{{ route('foodmenu.index') }}">
+        <span class="menu-title">Food Menu</span>
         <i class="fa-solid fa-bowl-rice menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('reservation.index')}}">
+      <a class="nav-link" href="{{ route('reservation.index') }}">
         <span class="menu-title">Reservations</span>
         <i class="fa-solid fa-table menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('specialdishes.index')}}">
-        <span class="menu-title">Special dishes</span>
+      <a class="nav-link" href="{{ route('specialdishes.index') }}">
+        <span class="menu-title">Special Dishes</span>
         <i class="fa-solid fa-bell-concierge menu-icon"></i>
       </a>
     </li>
+    @else
+    <!-- Links for Customer -->
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('testimonial.index')}}">
+      <a class="nav-link" href="{{ route('reservation.index') }}">
+        <span class="menu-title">Reservations</span>
+        <i class="fa-solid fa-table menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('testimonial.index') }}">
         <span class="menu-title">Testimonials</span>
         <i class="fa-solid fa-star-half-stroke menu-icon"></i>
       </a>
     </li>
+    @endif
   </ul>
 </nav>

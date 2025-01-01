@@ -15,9 +15,9 @@ class TestimonialController extends Controller
      *
      * @return Boolean true/false
      */
-    public function GetIsAdmin()
+    private function GetIsAdmin()
     {
-        return Auth::id() && Auth::user()->usertype = "1" ? true : false;
+        return Auth::check() && Auth::user()->usertype === "admin";
     }
 
     /**
