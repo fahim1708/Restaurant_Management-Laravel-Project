@@ -5,7 +5,10 @@
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
 	<div class="content-wrapper">
-		<a href="<?php echo e(route('testimonial.create')); ?>" class="btn btn-primary mx-2">Add Testimonial</a>
+		
+		<?php if(Auth::check() && Auth::user()->usertype === 'customer'): ?>
+    		<a href="<?php echo e(route('testimonial.create')); ?>" class="btn btn-primary mx-2">Add Testimonial</a>
+		<?php endif; ?>
 	</div>
 
 	<div class="content-wrapper">
@@ -14,7 +17,7 @@
 				<div class="card-body">
 					<h4 class="card-title">Testimonial Data-Table</h4>					
 					<p class="card-description">
-						Client testiomonials information table 
+						Client testimonials information table 
 					</p>
 
 					<?php if(session()->has('msg')): ?>

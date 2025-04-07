@@ -1,48 +1,117 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('{{ asset('assets/images/login-bg.png') }}'); background-repeat: no-repeat; background-position: center center; background-attachment: fixed;
+            color: #f89335;
+        }
 
-        <x-jet-validation-errors class="mb-4" />
+        /* Glass Effect for Login Box */
+        .login-box {
+            background: rgba(24, 24, 36, 0.6); /* Semi-transparent glass effect */
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Blur glass effect */
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+        .login-box h2 {
+            margin: 0 0 20px 0;
+            text-align: center;
+            color: #f89335;
+            font-size: 24px;
+        }
 
+        .login-box label {
+            font-size: 14px;
+            color: #f89335;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #f89335;
+            background: transparent;
+            color: #f89335;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .login-box input::placeholder {
+            color: #f89335;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f89335;
+            border: none;
+            border-radius: 8px;
+            color: #181824;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-box button:hover {
+            background-color: #d6782e;
+        }
+
+        .login-box a {
+            display: block;
+            text-align: center;
+            color: #f89335;
+            font-size: 12px;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .login-box {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="Enter your email" required autofocus>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="Enter your password" required>
             </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-jet-button>
-            </div>
+            <button type="submit">Log In</button>
         </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+        <a href="{{ route('password.request') }}">Forgot your password?</a>
+    </div>
+</body>
+</html>

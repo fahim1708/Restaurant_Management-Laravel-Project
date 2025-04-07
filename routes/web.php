@@ -54,9 +54,13 @@ Route::resource('foodmenu', FoodMenuController::class)->only([
 ]);
 
 /* Special Dish */
+// Route::resource('specialdishes', SpecialDishController::class)->only([
+//     'index', 'create', 'store', 'edit', 'update', 'destroy'
+// ]);
 Route::resource('specialdishes', SpecialDishController::class)->only([
     'index', 'create', 'store', 'edit', 'update', 'destroy'
 ]);
+
 
 /* Testimonial */
 Route::resource('testimonial', TestimonialController::class)->only([
@@ -73,5 +77,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::get('/admin/users', [UserController::class, 'index'])->name('user.index');
 
 Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-
 

@@ -3,7 +3,7 @@
   <ul class="nav">
     <li class="nav-item nav-profile">
       <a class="nav-link" href="<?php echo e(route('admin.index')); ?>">
-        <?php if($user !== null): ?>
+        <?php if(Auth::check() && $user !== null): ?>
         <div class="profile-image">
           <?php if($user->img): ?>
           <img
@@ -36,46 +36,56 @@
       <span class="nav-link">Tables</span>
     </li>
 
-    <?php if($isAdmin === true): ?>
-    <!-- Links for Admin -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo e(route('user.index')); ?>">
-        <span class="menu-title">Users</span>
-        <i class="fa-solid fa-users menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo e(route('foodmenu.index')); ?>">
-        <span class="menu-title">Food Menu</span>
-        <i class="fa-solid fa-bowl-rice menu-icon"></i>
-      </a>
-    </li>
+    <?php if(!Auth::check()): ?>
+    <!-- Links for Guest (Not Logged In) -->
     <li class="nav-item">
       <a class="nav-link" href="<?php echo e(route('reservation.index')); ?>">
         <span class="menu-title">Reservations</span>
         <i class="fa-solid fa-table menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo e(route('specialdishes.index')); ?>">
-        <span class="menu-title">Special Dishes</span>
-        <i class="fa-solid fa-bell-concierge menu-icon"></i>
       </a>
     </li>
     <?php else: ?>
-    <!-- Links for Customer -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo e(route('reservation.index')); ?>">
-        <span class="menu-title">Reservations</span>
-        <i class="fa-solid fa-table menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="<?php echo e(route('testimonial.index')); ?>">
-        <span class="menu-title">Testimonials</span>
-        <i class="fa-solid fa-star-half-stroke menu-icon"></i>
-      </a>
-    </li>
+      <?php if($isAdmin === true): ?>
+      <!-- Links for Admin -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('user.index')); ?>">
+          <span class="menu-title">Users</span>
+          <i class="fa-solid fa-users menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('foodmenu.index')); ?>">
+          <span class="menu-title">Food Menu</span>
+          <i class="fa-solid fa-bowl-rice menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('reservation.index')); ?>">
+          <span class="menu-title">Reservations</span>
+          <i class="fa-solid fa-table menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('specialdishes.index')); ?>">
+          <span class="menu-title">Special Dishes</span>
+          <i class="fa-solid fa-bell-concierge menu-icon"></i>
+        </a>
+      </li>
+      <?php else: ?>
+      <!-- Links for Customer -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('reservation.index')); ?>">
+          <span class="menu-title">Reservations</span>
+          <i class="fa-solid fa-table menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('testimonial.index')); ?>">
+          <span class="menu-title">Testimonials</span>
+          <i class="fa-solid fa-star-half-stroke menu-icon"></i>
+        </a>
+      </li>
+      <?php endif; ?>
     <?php endif; ?>
   </ul>
 </nav>

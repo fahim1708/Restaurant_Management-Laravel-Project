@@ -1,6 +1,9 @@
 <x-admin.index :user="$user" :isAdmin="$isAdmin">
 	<div class="content-wrapper">
-		<a href="{{ route('testimonial.create') }}" class="btn btn-primary mx-2">Add Testimonial</a>
+		{{-- Show "Add Testimonial" only for customers --}}
+		@if(Auth::check() && Auth::user()->usertype === 'customer')
+    		<a href="{{ route('testimonial.create') }}" class="btn btn-primary mx-2">Add Testimonial</a>
+		@endif
 	</div>
 
 	<div class="content-wrapper">
@@ -9,7 +12,7 @@
 				<div class="card-body">
 					<h4 class="card-title">Testimonial Data-Table</h4>					
 					<p class="card-description">
-						Client testiomonials information table 
+						Client testimonials information table 
 					</p>
 
 					@if(session()->has('msg'))
